@@ -9,21 +9,28 @@ echo Imagined by Alker / Coded and Created by Alker -- 2023
 Pause
 :: Path of the backup folder
 set dir=C:\xamppBackupStorage
+
+:: Path of xampp folder
+:: set xamppDir=C:\xampp :: Uncomment when test OK
+set xamppDir=C:\XamppTester
+
 :: Check if backup folder exists, if not create it
 if not exist !dir! (
     mkdir !dir!
         echo Folder '!dir!' created.
 )
 
+:: Get the date for the backup's folder
 for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"
 set "YY=%dt:~2,2%" & set "YYYY=%dt:~0,4%" & set "MM=%dt:~4,2%" & set "DD=%dt:~6,2%"
 set "HH=%dt:~8,2%" & set "Min=%dt:~10,2%" & set "Sec=%dt:~12,2%"
-
 set "datestamp=%YYYY%_%MM%_%DD%" & set "timestamp=%HH%%Min%%Sec%"
 set "fullstamp=%YYYY%-%MM%-%DD%_%HH%-%Min%-%Sec%"
 
+:: Path of the backup's folder
 set fullDir=!dir!\%datestamp%
 
+:: Check if backup folder exists, if not create it and shutdown script
 if not exist %fullDir% (
     mkdir %fullDir%
         echo Folder '%datestamp%' in !dir! created.
@@ -36,6 +43,11 @@ if not exist %fullDir% (
 
 echo Your backup will be save in %fullDir%
 
+echo Backup generating.....
+
+xcopy !xamppDir! %fullDir% /v /e /s /t /w
+
+echo Backup is ready !
 Pause
 echo Shutdown...
 exit
