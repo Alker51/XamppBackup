@@ -3,8 +3,9 @@
 Setlocal Enabledelayedexpansion
 :: Header of the script
 echo Welcome to XAMPP Backup
-echo This script will create a backup of all your Xampp.
-echo In future features, you will get more features to use this script.
+echo This script will create a backup of your Xampp.
+echo It wall save the htdocs, db, and php folder.
+echo WIP, if if you want to see a feature, let me know it on GitHub.
 echo Imagined by Alker / Coded and Created by Alker -- 2023
 timeout /t 1 > NUL
 :: Path of the backup folder
@@ -12,7 +13,7 @@ set dir=C:\xamppBackupStorage
 
 :: Path of xampp folder
 :: set xamppDir=C:\xampp :: Uncomment when test OK
-set xamppDir=C:\XamppTester
+set xamppDir=C:\xampp
 
 :: Check if backup folder exists, if not create it
 if not exist !dir! (
