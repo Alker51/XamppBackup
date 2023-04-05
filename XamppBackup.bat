@@ -6,7 +6,7 @@ echo Welcome to XAMPP Backup
 echo This script will create a backup of all your Xampp.
 echo In future features, you will get more features to use this script.
 echo Imagined by Alker / Coded and Created by Alker -- 2023
-Pause
+timeout /t 1 > NUL
 :: Path of the backup folder
 set dir=C:\xamppBackupStorage
 
@@ -34,6 +34,7 @@ set fullDir=!dir!\%datestamp%
 if not exist %fullDir% (
     mkdir %fullDir%
         echo Folder '%datestamp%' in !dir! created.
+        timeout /t 1 > NUL
 ) else (
     echo A backup as already generated today.
     Pause
@@ -42,10 +43,10 @@ if not exist %fullDir% (
 )
 
 echo Your backup will be save in %fullDir%
-
+timeout /t 2 > NUL
 echo Backup generating.....
 
-xcopy !xamppDir! %fullDir% /v /e /s /t /w
+robocopy !xamppDir! %fullDir% *.* /e
 
 echo Backup is ready !
 Pause
